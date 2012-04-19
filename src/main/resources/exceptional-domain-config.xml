@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+							http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+							
+	<bean id="exceptionalFacade" class="be.butskri.exceptional.ExceptionalFacadeImpl">
+		<property name="thrownExceptionFactory" ref="thrownExceptionFactory" />
+		<property name="thrownExceptionRepository" ref="thrownExceptionRepository" />
+	</bean>
+
+	<bean id="thrownExceptionFactory" class="be.butskri.exceptional.ThrownExceptionFactory">
+		<property name="calledMethodFactory" ref="calledMethodFactory" />
+	</bean>
+
+	<bean id="calledMethodFactory" class="be.butskri.exceptional.CalledMethodFactory">
+		<property name="usedParameterFactory" ref="usedParameterFactory" />
+	</bean>
+	
+	<bean id="usedParameterFactory" class="be.butskri.exceptional.UsedParameterFactory">
+		<property name="toStringUtil" ref="toStringUtil" />
+	</bean>
+	
+	<bean id="toStringUtil" class="be.butskri.commons.util.ObjectUtils" />
+	
+	<bean id="thrownExceptionRepository" class="be.butskri.exceptional.ThrownExceptionRepository" />
+
+</beans>
